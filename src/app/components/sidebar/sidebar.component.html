@@ -1,0 +1,183 @@
+<div class="ui styled fluid accordion">
+  <div class="title" (click)="handleSidebarPane('door_system')" [ngClass]="{'active': (openedTab['door_system'])}">
+    <i class="dropdown icon"></i>
+    <div class="ui orange horizontal label">Step 1</div> Door System
+  </div>
+  <div class="content" [ngClass]="{'active': (openedTab['door_system'])}">
+    <div class="ui top attached tabular menu">
+      <a class="item" [ngClass]="{'active': !isEuroLine}" (click)="handleDoorLine()">
+        Infinity Line
+      </a>
+      <a class="item" [ngClass]="{'active': isEuroLine}" (click)="handleDoorLine()">
+        Euro Line
+      </a>
+    </div>
+    <div class="ui bottom attached segment" *ngIf="!isEuroLine">
+      <div class="ui attached segment link-active-teal">
+        <a href="#">
+          <div class="ui small images">
+            <img class="door-system-img" src="assets/images/door_categories/foldingdoor.jpg">
+            <img class="door-system-img" src="assets/images/door_categories/slidingdoorwithbottomtrack_.png">
+          </div>
+          <div class="ui divider mt-0"></div>
+          <h5 class="ui header center aligned mt-0">Sliding Door with Bottom Rack</h5>
+        </a>
+      </div>
+      <br/>
+      <div class="ui attached segment">
+        <a href="#">
+          <div class="ui small images">
+            <img class="door-system-img" src="assets/images/door_categories/foldingdoor.jpg">
+            <img class="door-system-img" src="assets/images/door_categories/slidingdoorwithbottomtrack_.png">
+          </div>
+          <div class="ui divider mt-0"></div>
+          <h5 class="ui header center aligned mt-0">Sliding Door with Bottom Rack</h5>
+        </a>
+      </div>
+    </div>
+    <div class="ui bottom attached segment" *ngIf="isEuroLine">
+      <div class="ui attached segment link-active-olive">
+        <a href="#">
+          <div class="ui small images">
+            <img class="door-system-img" src="assets/images/door_categories/foldingdoor.jpg">
+            <img class="door-system-img" src="assets/images/door_categories/slidingdoorwithbottomtrack_.png">
+          </div>
+          <div class="ui divider mt-0"></div>
+          <h5 class="ui header center aligned mt-0">Sliding Door with Bottom Rack</h5>
+        </a>
+      </div>
+      <br/>
+      <div class="ui attached segment">
+        <a href="#">
+          <div class="ui small images">
+            <img class="door-system-img" src="assets/images/door_categories/foldingdoor.jpg">
+            <img class="door-system-img" src="assets/images/door_categories/slidingdoorwithbottomtrack_.png">
+          </div>
+          <div class="ui divider mt-0"></div>
+          <h5 class="ui header center aligned mt-0">Sliding Door with Bottom Rack</h5>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="title" (click)="handleSidebarPane('opening_size')" [ngClass]="{'active': (openedTab['opening_size'])}">
+    <i class="dropdown icon"></i>
+    <div class="ui orange horizontal label">Step 2</div> Opening Size
+  </div>
+  <div class="content" [ngClass]="{'active': (openedTab['opening_size'])}">
+
+    <form class="ui form">
+      <div class="ui info tiny message">
+        A door panel cannot be wider than 42” and higher than 98”.
+      </div>
+      <div class="field">
+        <label>Name</label>
+        <div class="two fields">
+          <div class="field">
+            <div class="ui right labeled input">
+              <input type="number" name="shipping[first-name]" min="42" max="98" placeholder="Width">
+              <div class="ui basic label">
+                inches
+              </div>
+            </div>
+          </div>
+          <div class="field">
+            <div class="ui right labeled input">
+              <input type="number" name="shipping[first-name]" min="42" max="98" placeholder="Height">
+              <div class="ui basic label">
+                inches
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="title" (click)="handleSidebarPane('number_doors')" [ngClass]="{'active': (openedTab['number_doors'])}">
+    <i class="dropdown icon"></i>
+    <div class="ui orange horizontal label">Step 3</div> Number of Doors
+  </div>
+  <div class="content" [ngClass]="{'active': (openedTab['number_doors'])}">
+    <div class="ui selection dropdown fluid" [ngClass]="{'active visible': isNumDoorsClicked}" (click)="handleNumDoorsDropdown()">
+      <input type="hidden" name="gender">
+      <i class="dropdown icon"></i>
+      <div class="text" [ngClass]="{'default': (numDoor === 'Select number of doors')}">{{ numDoor }}</div>
+      <div class="menu" [ngClass]="{'transition visible display-block': isNumDoorsClicked}">
+        <div class="item" value="2" (click)="handleNumDoorsOption($event)">2</div>
+        <div class="item" value="3" (click)="handleNumDoorsOption($event)">3</div>
+        <div class="item" value="4" (click)="handleNumDoorsOption($event)">4</div>
+        <div class="item" value="5" (click)="handleNumDoorsOption($event)">5</div>
+        <div class="item" value="6" (click)="handleNumDoorsOption($event)">6</div>
+      </div>
+    </div>
+  </div>
+  <div class="title" (click)="handleSidebarPane('door_design')" [ngClass]="{'active': (openedTab['door_design'])}">
+    <i class="dropdown icon"></i>
+    <div class="ui orange horizontal label">Step 4</div> Door Design
+  </div>
+  <div class="content" [ngClass]="{'active': (openedTab['door_design'])}">
+    <div class="ui horizontal segments">
+      <div class="ui segment">
+        <a href="#" (click)="handleDoorDesign('Odna')">
+          <img class="ui tiny centered image" src="assets/images/door_design/door1.png">
+          <div class="ui divider"></div>
+          <button class="ui teal mini fluid button" [ngClass]="{'basic': (doorDesign === 'Stella')}" (click)="handleDoorDesign('Odna')">Odna</button>
+        </a>
+      </div>
+      <div class="ui segment" [ngClass]="{'link-active-teal': (doorDesign === 'Odna')}">
+        <a href="#" (click)="handleDoorDesign('Stella')">
+          <img class="ui tiny centered image" src="assets/images/door_design/door8.png">
+          <div class="ui divider"></div>
+          <button class="ui teal mini fluid button" [ngClass]="{'basic': (doorDesign === 'Odna')}" (click)="handleDoorDesign('Stella')">Stella</button>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="title" (click)="handleSidebarPane('door_frame')" [ngClass]="{'active': (openedTab['door_frame'])}">
+    <i class="dropdown icon"></i>
+    <div class="ui orange horizontal label">Step 5</div> Door Frame and Track Colour
+  </div>
+  <div class="content" [ngClass]="{'active': (openedTab['door_frame'])}">
+    <div class="ui horizontal segments">
+      <div class="ui segment" [ngClass]="{'link-active-olive': (doorFrame === 'U-Edge')}">
+        <a href="#" (click)="handleDoorFrame('T-Edge')">
+          <img class="ui small centered image" src="assets/images/door_frame_and_track_colors/T_Edge.jpg">
+          <div class="ui divider"></div>
+          <button class="ui olive mini fluid button" [ngClass]="{'basic': (doorFrame === 'U-Edge')}" (click)="handleDoorFrame('T-Edge')">T-Edge</button>
+        </a>
+      </div>
+      <div class="ui segment" [ngClass]="{'link-active-olive': (doorFrame === 'T-Edge')}">
+        <a href="#" (click)="handleDoorFrame('U-Edge')">
+          <img class="ui small centered image" src="assets/images/door_frame_and_track_colors/U_Edge.jpg">
+          <div class="ui divider"></div>
+          <button class="ui olive mini fluid button" [ngClass]="{'basic': (doorFrame === 'T-Edge')}" (click)="handleDoorFrame('U-Edge')">U-Edge</button>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="title" (click)="handleSidebarPane('door_size')" [ngClass]="{'active': (openedTab['door_size'])}">
+    <i class="dropdown icon"></i>
+    <div class="ui orange horizontal label">Step 6</div> Door Inserts
+  </div>
+  <div class="content" [ngClass]="{'active': (openedTab['door_size'])}">
+    <div class="ui tiny images img-centered">
+      <img class="ui image" src="assets/images/store_colour_selector/wood_backgrounds/basalto.jpg">
+      <img class="ui image" src="assets/images/store_colour_selector/wood_backgrounds/basalto.jpg">
+      <img class="ui image" src="assets/images/store_colour_selector/wood_backgrounds/basalto.jpg">
+      <img class="ui image" src="assets/images/store_colour_selector/wood_backgrounds/basalto.jpg">
+    </div>
+  </div>
+  <div class="title" (click)="handleSidebarPane('price_inquiry')" [ngClass]="{'active': (openedTab['price_inquiry'])}">
+    <i class="dropdown icon"></i>
+    <div class="ui orange horizontal label">Step 7</div> Price Inquiry
+  </div>
+  <div class="content" [ngClass]="{'active': (openedTab['price_inquiry'])}">
+    <div class="ui info tiny message">
+      Enter your e-mail address to get a price quotation for your customized door.
+    </div>
+    <div class="ui action fluid left icon small input">
+      <input type="text" placeholder="matthew@sterlingpieces.com">
+      <button class="ui green button">Inquire price</button>
+      <i class="envelope outline icon"></i>
+    </div>
+  </div>
+</div>

@@ -3,13 +3,19 @@ import { NgModule } from '@angular/core';
 
 
 import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home/home.component';
+import { HomeComponent } from './pages/home/home.component';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { HeaderComponent } from './components/header/header.component';
+import { PreviewpanelComponent } from './components/previewpanel/previewpanel.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    SidebarComponent,
+    HeaderComponent,
+    PreviewpanelComponent
   ],
   imports: [
     BrowserModule

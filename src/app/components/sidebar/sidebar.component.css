@@ -1,0 +1,35 @@
+.door-system-img {
+  min-width: 150px;
+  min-height: 107px;
+}
+
+.mt-0 {
+  margin-top: 0px;
+}
+
+.mt-1 {
+  margin-top: 1em;
+}
+
+.mb-0 {
+  margin-bottom: 0px;
+}
+
+.link-active-teal {
+  border-color: #00b5ad !important;
+}
+
+.link-active-olive {
+  border-color: #b5cc18 !important;
+}
+
+.display-block {
+  display: block !important;
+}
+
+.img-centered {
+  margin: auto !important;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
