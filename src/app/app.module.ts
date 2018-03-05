@@ -8,6 +8,7 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { HeaderComponent } from './components/header/header.component';
 import { PreviewpanelComponent } from './components/previewpanel/previewpanel.component';
 
+import { DoorInsertsService } from './services/door-inserts.service';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,9 @@ import { PreviewpanelComponent } from './components/previewpanel/previewpanel.co
   imports: [
     BrowserModule
   ],
-  providers: [],
+  providers: [
+    DoorInsertsService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

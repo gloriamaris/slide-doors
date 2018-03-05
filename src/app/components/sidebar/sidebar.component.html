@@ -5,10 +5,10 @@
   </div>
   <div class="content" [ngClass]="{'active': (openedTab['door_system'])}">
     <div class="ui top attached tabular menu">
-      <a class="item" [ngClass]="{'active': !isEuroLine}" (click)="handleDoorLine()">
+      <a class="item" [ngClass]="{'active': !isEuroLine}" (click)="handleDoorLine($event)">
         Infinity Line
       </a>
-      <a class="item" [ngClass]="{'active': isEuroLine}" (click)="handleDoorLine()">
+      <a class="item" [ngClass]="{'active': isEuroLine}" (click)="handleDoorLine($event)">
         Euro Line
       </a>
     </div>
@@ -154,16 +154,54 @@
       </div>
     </div>
   </div>
-  <div class="title" (click)="handleSidebarPane('door_size')" [ngClass]="{'active': (openedTab['door_size'])}">
+  <div class="title" (click)="handleSidebarPane('door_inserts')" [ngClass]="{'active': (openedTab['door_inserts'])}">
     <i class="dropdown icon"></i>
     <div class="ui orange horizontal label">Step 6</div> Door Inserts
   </div>
-  <div class="content" [ngClass]="{'active': (openedTab['door_size'])}">
-    <div class="ui tiny images img-centered">
-      <img class="ui image" src="assets/images/store_colour_selector/wood_backgrounds/basalto.jpg">
-      <img class="ui image" src="assets/images/store_colour_selector/wood_backgrounds/basalto.jpg">
-      <img class="ui image" src="assets/images/store_colour_selector/wood_backgrounds/basalto.jpg">
-      <img class="ui image" src="assets/images/store_colour_selector/wood_backgrounds/basalto.jpg">
+  <div class="content" [ngClass]="{'active': (openedTab['door_inserts'])}">
+    <div class="ui top attached tabular menu">
+      <a class="item" [ngClass]="{'active': isHighGloss}" (click)="handleDoorInserts($event)">
+        High Gloss
+      </a>
+      <a class="item" [ngClass]="{'active': !isHighGloss}" (click)="handleDoorInserts($event)">
+        Wood Grain
+      </a>
+    </div>
+    <div class="ui bottom attached center aligned segment" *ngIf="!isHighGloss">
+      <div class="ui horizontal segments">
+        <div class="ui segment compact padding-thin" *ngFor="let grain of doorInserts['wood_grain'].slice(0, 4)">
+          <a href="#">
+            <img class="ui image centered bordered tiny-tile" src="assets/images/store_colour_selector/wood_backgrounds/{{ grain['filename'] }}">
+            <small><strong>{{ grain['name'] }}</strong></small>
+          </a>
+        </div>
+      </div>
+      <div class="ui horizontal segments">
+        <div class="ui segment compact" *ngFor="let grain of doorInserts['wood_grain'].slice(4, 8)">
+          <a href="#">
+            <img class="ui image tiny-tile" src="assets/images/store_colour_selector/wood_backgrounds/{{ grain['filename'] }}">
+            <small><strong>{{ grain['name'] }}</strong></small>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="ui bottom attached center aligned segment" *ngIf="isHighGloss">
+      <div class="ui horizontal segments">
+        <div class="ui segment compact padding-thin" *ngFor="let grain of doorInserts['high_gloss'].slice(0, 4)">
+          <a href="#">
+            <img class="ui image centered bordered tiny-tile" src="assets/images/store_colour_selector/wood_backgrounds/{{ grain['filename'] }}">
+            <small><strong>{{ grain['name'] }}</strong></small>
+          </a>
+        </div>
+      </div>
+      <div class="ui horizontal segments">
+        <div class="ui segment compact" *ngFor="let grain of doorInserts['high_gloss'].slice(4, 8)">
+          <a href="#">
+            <img class="ui image tiny-tile" src="assets/images/store_colour_selector/wood_backgrounds/{{ grain['filename'] }}">
+            <small><strong>{{ grain['name'] }}</strong></small>
+          </a>
+        </div>
+      </div>
     </div>
   </div>
   <div class="title" (click)="handleSidebarPane('price_inquiry')" [ngClass]="{'active': (openedTab['price_inquiry'])}">
