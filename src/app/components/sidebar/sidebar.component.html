@@ -13,68 +13,48 @@
       </a>
     </div>
     <div class="ui bottom attached segment" *ngIf="!isEuroLine">
-      <div class="ui attached segment link-active-teal">
-        <a href="#">
-          <div class="ui small images">
-            <img class="door-system-img" src="assets/images/door_categories/foldingdoor.jpg">
-            <img class="door-system-img" src="assets/images/door_categories/slidingdoorwithbottomtrack_.png">
-          </div>
-          <div class="ui divider mt-0"></div>
-          <h5 class="ui header center aligned mt-0">Sliding Door with Bottom Rack</h5>
-        </a>
-      </div>
-      <br/>
-      <div class="ui attached segment">
-        <a href="#">
-          <div class="ui small images">
-            <img class="door-system-img" src="assets/images/door_categories/foldingdoor.jpg">
-            <img class="door-system-img" src="assets/images/door_categories/slidingdoorwithbottomtrack_.png">
-          </div>
-          <div class="ui divider mt-0"></div>
-          <h5 class="ui header center aligned mt-0">Sliding Door with Bottom Rack</h5>
-        </a>
-      </div>
+      <span class="mb-1" *ngFor="let system of doorSystems['infinity_line']">
+        <div class="ui attached segment link-active-teal mb-1" [ngClass]="{'link-active-teal': (selectedOnTab['door_system'] === system['name'])}">
+          <a href="#">
+            <div class="ui small images">
+              <img class="door-system-img" src="assets/images/door_categories/{{ system['filenames'][0] }}">
+              <img class="door-system-img" src="assets/images/door_categories/{{ system['filenames'][1] }}">
+            </div>
+            <div class="ui divider mt-0"></div>
+            <h5 class="ui header center aligned mt-0">{{ system['name'] }}</h5>
+          </a>
+        </div>
+      </span>
     </div>
     <div class="ui bottom attached segment" *ngIf="isEuroLine">
-      <div class="ui attached segment link-active-olive">
-        <a href="#">
-          <div class="ui small images">
-            <img class="door-system-img" src="assets/images/door_categories/foldingdoor.jpg">
-            <img class="door-system-img" src="assets/images/door_categories/slidingdoorwithbottomtrack_.png">
-          </div>
-          <div class="ui divider mt-0"></div>
-          <h5 class="ui header center aligned mt-0">Sliding Door with Bottom Rack</h5>
-        </a>
-      </div>
-      <br/>
-      <div class="ui attached segment">
-        <a href="#">
-          <div class="ui small images">
-            <img class="door-system-img" src="assets/images/door_categories/foldingdoor.jpg">
-            <img class="door-system-img" src="assets/images/door_categories/slidingdoorwithbottomtrack_.png">
-          </div>
-          <div class="ui divider mt-0"></div>
-          <h5 class="ui header center aligned mt-0">Sliding Door with Bottom Rack</h5>
-        </a>
-      </div>
-    </div>
+      <span class="mb-1" *ngFor="let system of doorSystems['euro_line']">
+        <div class="ui attached segment link-active-teal mb-1" [ngClass]="{'link-active-teal': (selectedOnTab['door_system'] === system['name'])}">
+          <a href="#">
+            <div class="ui small images">
+              <img class="door-system-img" src="assets/images/door_categories/{{ system['filenames'][0] }}">
+              <img class="door-system-img" src="assets/images/door_categories/{{ system['filenames'][1] }}">
+            </div>
+            <div class="ui divider mt-0"></div>
+            <h5 class="ui header center aligned mt-0">{{ system['name'] }}</h5>
+          </a>
+        </div>
+      </span>
   </div>
   <div class="title" (click)="handleSidebarPane('opening_size')" [ngClass]="{'active': (openedTab['opening_size'])}">
     <i class="dropdown icon"></i>
     <div class="ui orange horizontal label">Step 2</div> Opening Size
   </div>
   <div class="content" [ngClass]="{'active': (openedTab['opening_size'])}">
-
     <form class="ui form">
       <div class="ui info tiny message">
-        A door panel cannot be wider than 42” and higher than 98”.
+        A door panel cannot be wider than 42” and higher than {{ [getMaxPanelSize()] }}”.
       </div>
       <div class="field">
         <label>Name</label>
         <div class="two fields">
           <div class="field">
             <div class="ui right labeled input">
-              <input type="number" name="shipping[first-name]" min="42" max="98" placeholder="Width">
+              <input type="number" name="shipping[first-name]" min="42" max="{{ [getMaxPanelSize()] }}" placeholder="Width">
               <div class="ui basic label">
                 inches
               </div>
@@ -82,7 +62,7 @@
           </div>
           <div class="field">
             <div class="ui right labeled input">
-              <input type="number" name="shipping[first-name]" min="42" max="98" placeholder="Height">
+              <input type="number" name="shipping[first-name]" min="42" max="{{ [getMaxPanelSize()] }}" placeholder="Height">
               <div class="ui basic label">
                 inches
               </div>

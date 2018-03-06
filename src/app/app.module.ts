@@ -9,6 +9,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { PreviewpanelComponent } from './components/previewpanel/previewpanel.component';
 
 import { DoorInsertsService } from './services/door-inserts.service';
+import { DoorSystemsService } from './services/door-systems.service';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { DoorInsertsService } from './services/door-inserts.service';
     BrowserModule
   ],
   providers: [
-    DoorInsertsService
+    DoorInsertsService,
+    DoorSystemsService
   ],
   bootstrap: [AppComponent]
 })

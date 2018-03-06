@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { DoorInsertsService } from '../../services/door-inserts.service';
+import { DoorSystemsService } from '../../services/door-systems.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -17,36 +18,69 @@ export class SidebarComponent implements OnInit {
   public doorDesign: string;
   public doorFrame: string;
   public doorInserts: object;
+  public doorSystems: object;
+  public selectedOnTab: object;
 
-  constructor(private doorInsertsService: DoorInsertsService) {
+  constructor(private doorInsertsService: DoorInsertsService, private doorSystemsService: DoorSystemsService) {
     this.openedTab = {
-      door_system: false,
+      door_system: true,
       opening_size: false,
       number_doors: false,
       door_design: false,
       door_frame: false,
-      door_inserts: true,
+      door_inserts: false,
       price_inquiry: false
+    }
+
+    this.selectedOnTab = {
+      door_system: '',
+      opening_size: '',
+      number_doors: '',
+      door_design: '',
+      door_frame: '',
+      door_inserts: '',
+      price_inquiry: ''
     }
 
     this.doorInserts = {
       wood_grain: this.getInsertsFromService('wood_grain'),
       high_gloss: this.getInsertsFromService('high_gloss')
-    };
+    }
+
+    this.doorSystems = {
+      euro_line: this.getSystemsFromService('euro_line'),
+      infinity_line: this.getSystemsFromService('infinity_line')
+    }
+
   }
 
   ngOnInit() {
+
+    this.isEuroLine = true;
 
     this.isNumDoorsClicked = false;
     this.numDoor = 'Select number of doors';
     this.doorDesign = 'Odna';
     this.doorFrame = 'T-Edge';
+
+    let type = (this.isEuroLine)? 'euro_line': 'infinity_line';
+
+
+    this.selectedOnTab = {
+      door_system: this.doorSystems[type][0]['name']
+    }
+  }
+
+  getMaxPanelSize () {
+    return (this.isEuroLine)? 98: 120;
   }
 
   getInsertsFromService (type: string) {
-    let response = this.doorInsertsService.getDoorInserts(type);
+    return this.doorInsertsService.getDoorInserts(type);
+  }
 
-    return response;
+  getSystemsFromService (type: string) {
+    return this.doorSystemsService.getDoorSystems(type);
   }
 
   handleDoorFrame (frame: string) {
