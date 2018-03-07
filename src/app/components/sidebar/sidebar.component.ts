@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { DoorInsertsService } from '../../services/door-inserts.service';
 import { DoorSystemsService } from '../../services/door-systems.service';
+import { DoorDesignsService } from '../../services/door-designs.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -19,9 +20,12 @@ export class SidebarComponent implements OnInit {
   public doorFrame: string;
   public doorInserts: object;
   public doorSystems: object;
+  public doorDesigns: object;
   public selectedOnTab: object;
 
-  constructor(private doorInsertsService: DoorInsertsService, private doorSystemsService: DoorSystemsService) {
+  constructor(private doorInsertsService: DoorInsertsService, 
+    private doorSystemsService: DoorSystemsService,
+    private doorDesignsService: DoorDesignsService) {
     this.openedTab = {
       door_system: true,
       opening_size: false,
@@ -33,7 +37,7 @@ export class SidebarComponent implements OnInit {
     }
 
     this.selectedOnTab = {
-      door_system: '',
+      door_system: {},
       opening_size: '',
       number_doors: '',
       door_design: '',
@@ -52,22 +56,29 @@ export class SidebarComponent implements OnInit {
       infinity_line: this.getSystemsFromService('infinity_line')
     }
 
+    this.doorDesigns = {
+      euro_line: this.getDoorDesignsFromService('euro_line'),
+      infinity_line: this.getDoorDesignsFromService('infinity_line')
+    }
   }
 
   ngOnInit() {
 
-    this.isEuroLine = true;
+    this.isEuroLine = false;
 
     this.isNumDoorsClicked = false;
     this.numDoor = 'Select number of doors';
     this.doorDesign = 'Odna';
     this.doorFrame = 'T-Edge';
 
-    let type = (this.isEuroLine)? 'euro_line': 'infinity_line';
-
-
+    let doorSysType = (this.isEuroLine)? 'euro_line': 'infinity_line';
+    let doorInsType = (this.isHighGloss)? 'high_gloss': 'wood_grain';
+    
     this.selectedOnTab = {
-      door_system: this.doorSystems[type][0]['name']
+      door_system: {
+        [doorSysType]: this.doorSystems[doorSysType][0]['name']
+      },
+      door_inserts: this.doorInserts[doorInsType][0]['name']
     }
   }
 
@@ -83,11 +94,22 @@ export class SidebarComponent implements OnInit {
     return this.doorSystemsService.getDoorSystems(type);
   }
 
-  handleDoorFrame (frame: string) {
+  getDoorDesignsFromService (type: string) {
+    return this.doorDesignsService.getDoorDesigns(type);
+  }
+
+  handleNextStep (currentStep: string, nextStep: string) {
+    this.openedTab[currentStep] = false;
+    this.openedTab[nextStep] = true;
+  }
+
+  handleDoorFrame (event: any, frame: string) {
+    event.preventDefault();
     this.doorFrame = frame;
   }
 
-  handleDoorDesign (design: string) {
+  handleDoorDesign (event: any, design: string) {
+    event.preventDefault();
     this.doorDesign = design;
   }
 
@@ -100,10 +122,20 @@ export class SidebarComponent implements OnInit {
     this.isEuroLine = !this.isEuroLine;
   }
 
+  handlePaneDoorSystem (event: any, type: string, value: string) {
+    event.preventDefault();
+    this.selectedOnTab['door_system'] = { [type]: value }
+  }
+
   handleDoorInserts (event: any) {
     event.preventDefault();
 
     this.isHighGloss = !this.isHighGloss;
+  }
+
+  handlePaneDoorInserts (event: any, type: string, value: string) {
+    event.preventDefault();
+    this.selectedOnTab['door_inserts'][type] = value;
   }
 
   handleNumDoorsDropdown () {

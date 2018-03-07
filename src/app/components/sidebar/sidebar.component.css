@@ -27,6 +27,10 @@
   border-color: #b5cc18 !important;
 }
 
+.link-active-orange--bold {
+  border: 2px solid #f26202 !important;
+}
+
 .display-block {
   display: block !important;
 }
