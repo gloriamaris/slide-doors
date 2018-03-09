@@ -91,9 +91,8 @@
       <i class="dropdown icon"></i>
       <div class="text" [ngClass]="{'default': (numDoor === 'Select number of doors')}">{{ numDoor }}</div>
       <div class="menu" [ngClass]="{'transition visible display-block': isNumDoorsClicked}">
-         <div class="item" value="2" (click)="handleNumDoorsOption($event)" *ngFor="let num of maxNumDoors; let i = index;">{{ i+2 }}</div>
+         <div class="item" (click)="handleNumDoorsOption($event)" *ngFor="let num of maxNumDoors; let i = index;">{{ i+2 }}</div>
       </div>
-      
     </div>
     <br/>
     <button class="ui fluid orange button" (click)="handleNextStep('number_doors', 'door_design')">
@@ -152,19 +151,6 @@
           <button class="ui olive mini fluid button" [ngClass]="{'basic': (doorFrame !== frame['name'])}" (click)="handleDoorFrame($event, frame['name'])">{{ frame['name'] }}</button>
         </a>       
       </div>
-      
-      <!-- <div class="ui segment" [ngClass]="{'link-active-olive': (doorFrame === 'U-Edge')}">
-        <a href="#" (click)="handleDoorFrame($event, 'T-Edge')">
-          <img class="ui small centered image" src="assets/images/door_frame_and_track_colors/T_Edge.jpg">
-        </a>
-      </div>
-      <div class="ui segment" [ngClass]="{'link-active-olive': (doorFrame === 'T-Edge')}">
-        <a href="#" (click)="handleDoorFrame($event, 'U-Edge')">
-          <img class="ui small centered image" src="assets/images/door_frame_and_track_colors/U_Edge.jpg">
-          <div class="ui divider"></div>
-          <button class="ui olive mini fluid button" [ngClass]="{'basic': (doorFrame === 'T-Edge')}" (click)="handleDoorFrame($event, 'U-Edge')">U-Edge</button>
-        </a>
-      </div> -->
     </div>
     <div clas="ui divider hidden"></div>
     <button class="ui fluid orange button" (click)="handleNextStep('door_frame', 'door_inserts')">

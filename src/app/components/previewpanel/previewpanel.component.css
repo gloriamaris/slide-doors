@@ -2,3 +2,36 @@
 	max-width: 678px;
 	max-height: 370;
 }
+
+.window-bg {
+	opacity: 0.4;
+}
+
+.window-pane {
+	position: absolute; 
+	z-index: 1;
+	width: 115px;
+	height: 275px;
+	background: maroon;
+	border-style: inset;
+}
+
+.one {
+	top: 2.8rem;
+	left: 8.5rem;
+}
+
+.two {
+	top: 2.8rem;
+	left: 17rem;
+}
+
+.three {
+	top: 2.8rem;
+	left: 25.5rem;
+}
+
+.four {
+	top: 2.8rem;
+	left: 34rem;
+}

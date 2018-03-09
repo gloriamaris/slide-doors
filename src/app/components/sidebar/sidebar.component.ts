@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 import { DoorInsertsService } from '../../services/door-inserts.service';
 import { DoorSystemsService } from '../../services/door-systems.service';
@@ -25,6 +25,8 @@ export class SidebarComponent implements OnInit {
   public selectedOnTab: object;
   public doorFrames: Array<object>;
   public maxNumDoors: Array<number>;
+
+  @Output() sidebarEvent = new EventEmitter<string>();
 
   constructor(private doorInsertsService: DoorInsertsService, 
     private doorSystemsService: DoorSystemsService,
@@ -86,6 +88,7 @@ export class SidebarComponent implements OnInit {
     }
 
     this.doorFrames = this.doorFramesService.getDoorFrames(doorSysType);
+    this.maxNumDoors = new Array(1);
   }
 
   getMaxPanelSize () {
@@ -156,6 +159,7 @@ export class SidebarComponent implements OnInit {
 
   handleDoorLine (event: any, type: string) {
     event.preventDefault();
+    this.sidebarEvent.emit('2');
     this.getDoorFrameTypes(type);
     this.isEuroLine = !this.isEuroLine;
   }
@@ -184,6 +188,7 @@ export class SidebarComponent implements OnInit {
 
   handleNumDoorsOption ($event: any) {
     this.numDoor = $event.target.innerText;
+    this.sidebarEvent.emit(this.numDoor);
   }
 
 }

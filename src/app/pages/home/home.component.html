@@ -1,8 +1,8 @@
 <div class="ui centered grid container">
     <div class="four wide column">
-      <app-sidebar></app-sidebar>
+      <app-sidebar (sidebarEvent)="getNumDoors($event)"></app-sidebar>
     </div>
     <div class="six wide column">
-      <app-previewpanel></app-previewpanel>
+      <app-previewpanel [numDoors]="numDoors"></app-previewpanel>
     </div>
 </div>

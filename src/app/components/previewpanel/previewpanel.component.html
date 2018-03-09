@@ -1,3 +1,15 @@
-<div class="ui fluid segment" *ngIf="!isEuroLine">
-  <img class="ui image fluid" src="assets/images/4doors.png">
+<div class="ui fluid segment">
+	<div class="window-pane one">
+  	<img class="ui image window-bg fluid" src="assets/images/wood_background/lacobel-dark-blue-1702241442.jpg">
+	</div>
+	<div class="window-pane two" *ngIf="(numDoors > 1)">
+		<img class="ui image window-bg fluid" src="assets/images/wood_background/lacobel-dark-blue-1702241442.jpg">
+	</div>
+	<div class="window-pane three" *ngIf="(numDoors > 2)">
+		<img class="ui image window-bg fluid" src="assets/images/wood_background/lacobel-dark-blue-1702241442.jpg">
+	</div>
+	<div class="window-pane four" *ngIf="(numDoors > 3)">
+		<img class="ui image window-bg fluid" src="assets/images/wood_background/lacobel-dark-blue-1702241442.jpg">
+	</div>
+  <img class="ui image fluid" src="assets/images/background/viewer_background_made_to_measure_door_viewer.jpg">
 </div>
