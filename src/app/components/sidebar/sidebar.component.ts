@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { DoorInsertsService } from '../../services/door-inserts.service';
 import { DoorSystemsService } from '../../services/door-systems.service';
 import { DoorDesignsService } from '../../services/door-designs.service';
+import { DoorFramesService } from '../../services/door-frames.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -22,10 +23,14 @@ export class SidebarComponent implements OnInit {
   public doorSystems: object;
   public doorDesigns: object;
   public selectedOnTab: object;
+  public doorFrames: Array<object>;
+  public maxNumDoors: Array<number>;
 
   constructor(private doorInsertsService: DoorInsertsService, 
     private doorSystemsService: DoorSystemsService,
-    private doorDesignsService: DoorDesignsService) {
+    private doorDesignsService: DoorDesignsService,
+    private doorFramesService: DoorFramesService) {
+
     this.openedTab = {
       door_system: true,
       opening_size: false,
@@ -65,7 +70,6 @@ export class SidebarComponent implements OnInit {
   ngOnInit() {
 
     this.isEuroLine = false;
-
     this.isNumDoorsClicked = false;
     this.numDoor = 'Select number of doors';
     this.doorDesign = 'Odna';
@@ -80,10 +84,43 @@ export class SidebarComponent implements OnInit {
       },
       door_inserts: this.doorInserts[doorInsType][0]['name']
     }
+
+    this.doorFrames = this.doorFramesService.getDoorFrames(doorSysType);
   }
 
   getMaxPanelSize () {
     return (this.isEuroLine)? 98: 120;
+  }
+
+  getNumberOfDoors (type: string) {
+    this.maxNumDoors = new Array(1);
+
+    switch (type) {
+
+      case 'Sliding Door With Bottom Track':
+        this.maxNumDoors = new Array(3);
+      break;
+
+      case 'Swing Door':
+        this.maxNumDoors = new Array(2);
+      break;
+
+      case 'Folding Door':
+        this.maxNumDoors = new Array(3);
+      break;
+
+      case 'Suspended Sliding (No Bottom Track)':
+        this.maxNumDoors = new Array(1);
+      break;
+
+      case 'Wall Slide Door':
+        this.maxNumDoors = new Array(1);
+      break;
+    }
+  }
+
+  getDoorFrameTypes (type: string) {
+    this.doorFrames = this.doorFramesService.getDoorFrames(type);
   }
 
   getInsertsFromService (type: string) {
@@ -117,13 +154,16 @@ export class SidebarComponent implements OnInit {
     this.openedTab[tab] = !this.openedTab[tab];
   }
 
-  handleDoorLine (event: any) {
-    event.preventDefault()
+  handleDoorLine (event: any, type: string) {
+    event.preventDefault();
+    this.getDoorFrameTypes(type);
     this.isEuroLine = !this.isEuroLine;
   }
 
   handlePaneDoorSystem (event: any, type: string, value: string) {
     event.preventDefault();
+
+    this.getNumberOfDoors(value);
     this.selectedOnTab['door_system'] = { [type]: value }
   }
 

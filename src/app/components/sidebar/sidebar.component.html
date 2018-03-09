@@ -5,10 +5,10 @@
   </div>
   <div class="content" [ngClass]="{'active': (openedTab['door_system'])}">
     <div class="ui top attached tabular menu">
-      <a class="item" [ngClass]="{'active': !isEuroLine}" (click)="handleDoorLine($event)">
+      <a class="item" [ngClass]="{'active': !isEuroLine}" (click)="handleDoorLine($event, 'infinity_line')">
         Infinity Line
       </a>
-      <a class="item" [ngClass]="{'active': isEuroLine}" (click)="handleDoorLine($event)">
+      <a class="item" [ngClass]="{'active': isEuroLine}" (click)="handleDoorLine($event, 'euro_line')">
         Euro Line
       </a>
     </div>
@@ -91,11 +91,7 @@
       <i class="dropdown icon"></i>
       <div class="text" [ngClass]="{'default': (numDoor === 'Select number of doors')}">{{ numDoor }}</div>
       <div class="menu" [ngClass]="{'transition visible display-block': isNumDoorsClicked}">
-        <div class="item" value="2" (click)="handleNumDoorsOption($event)">2</div>
-        <div class="item" value="3" (click)="handleNumDoorsOption($event)">3</div>
-        <div class="item" value="4" (click)="handleNumDoorsOption($event)">4</div>
-        <div class="item" value="5" (click)="handleNumDoorsOption($event)">5</div>
-        <div class="item" value="6" (click)="handleNumDoorsOption($event)">6</div>
+         <div class="item" value="2" (click)="handleNumDoorsOption($event)" *ngFor="let num of maxNumDoors; let i = index;">{{ i+2 }}</div>
       </div>
       
     </div>
@@ -148,12 +144,18 @@
     <div class="ui yellow horizontal label">Step 5</div> Door Frame and Track Colour
   </div>
   <div class="content" [ngClass]="{'active': (openedTab['door_frame'])}">
-    <div class="ui horizontal segments">
-      <div class="ui segment" [ngClass]="{'link-active-olive': (doorFrame === 'U-Edge')}">
+    <div class="ui horizontal segments" [ngClass]="{'link-active-olive': (doorFrame === 'U-Edge')}">
+      <div class="ui segment" *ngFor="let frame of doorFrames" [ngClass]="{'link-active-olive': (doorFrame === frame['name'])}">
+        <a href="#" (click)="handleDoorFrame($event, frame['name'])">
+          <img class="ui small centered image" src="assets/images/door_frame_and_track_colors/{{ frame['filename'] }}">
+          <div class="ui divider"></div>
+          <button class="ui olive mini fluid button" [ngClass]="{'basic': (doorFrame !== frame['name'])}" (click)="handleDoorFrame($event, frame['name'])">{{ frame['name'] }}</button>
+        </a>       
+      </div>
+      
+      <!-- <div class="ui segment" [ngClass]="{'link-active-olive': (doorFrame === 'U-Edge')}">
         <a href="#" (click)="handleDoorFrame($event, 'T-Edge')">
           <img class="ui small centered image" src="assets/images/door_frame_and_track_colors/T_Edge.jpg">
-          <div class="ui divider"></div>
-          <button class="ui olive mini fluid button" [ngClass]="{'basic': (doorFrame === 'U-Edge')}" (click)="handleDoorFrame($event, 'T-Edge')">T-Edge</button>
         </a>
       </div>
       <div class="ui segment" [ngClass]="{'link-active-olive': (doorFrame === 'T-Edge')}">
@@ -162,7 +164,7 @@
           <div class="ui divider"></div>
           <button class="ui olive mini fluid button" [ngClass]="{'basic': (doorFrame === 'T-Edge')}" (click)="handleDoorFrame($event, 'U-Edge')">U-Edge</button>
         </a>
-      </div>
+      </div> -->
     </div>
     <div clas="ui divider hidden"></div>
     <button class="ui fluid orange button" (click)="handleNextStep('door_frame', 'door_inserts')">

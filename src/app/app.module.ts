@@ -11,6 +11,7 @@ import { PreviewpanelComponent } from './components/previewpanel/previewpanel.co
 import { DoorInsertsService } from './services/door-inserts.service';
 import { DoorSystemsService } from './services/door-systems.service';
 import { DoorDesignsService } from './services/door-designs.service';
+import { DoorFramesService } from './services/door-frames.service';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { DoorDesignsService } from './services/door-designs.service';
   providers: [
     DoorInsertsService,
     DoorSystemsService,
-    DoorDesignsService
+    DoorDesignsService,
+    DoorFramesService
   ],
   bootstrap: [AppComponent]
 })
